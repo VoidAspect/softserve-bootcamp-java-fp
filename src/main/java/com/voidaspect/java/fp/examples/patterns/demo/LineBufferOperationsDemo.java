@@ -1,7 +1,6 @@
 package com.voidaspect.java.fp.examples.patterns.demo;
 
-import com.voidaspect.java.fp.examples.patterns.OperationQueue;
-import com.voidaspect.java.fp.examples.patterns.PanicOnFailure;
+import com.voidaspect.java.fp.examples.patterns.*;
 
 public class LineBufferOperationsDemo {
 
@@ -15,6 +14,8 @@ public class LineBufferOperationsDemo {
                 """);
 
         var operationQueue = new OperationQueue(new PanicOnFailure());
+
+        operationQueue.enqueue(new MoveUpOperation(lineBuffer));
 
         operationQueue.enqueue(new PrintLineOperation(lineBuffer));
 
