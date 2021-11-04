@@ -3,7 +3,7 @@ package com.voidaspect.java.fp.problems;
 import java.util.Objects;
 import java.util.function.UnaryOperator;
 
-public final class OperatorChain<T> {
+public final class OperatorChain<T> implements UnaryOperator<T> {
 
     private final Iterable<UnaryOperator<T>> operators;
 
@@ -17,6 +17,13 @@ public final class OperatorChain<T> {
     }
 
     public UnaryOperator<T> combine() {
-        throw new UnsupportedOperationException("not implemented");
+        return this;
+    }
+
+    public T apply(T value) {
+        for (UnaryOperator<T> operator : operators) {
+            value = operator.apply(value);
+        }
+        return value;
     }
 }
