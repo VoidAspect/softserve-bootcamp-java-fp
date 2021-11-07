@@ -17,6 +17,13 @@ public final class OperatorChain<T> {
     }
 
     public UnaryOperator<T> combine() {
-        throw new UnsupportedOperationException("not implemented");
+        return this::apply;
+    }
+
+    private T apply(T value) {
+        for (UnaryOperator<T> operator : operators) {
+            value = operator.apply(value);
+        }
+        return value;
     }
 }
