@@ -1,6 +1,7 @@
 package com.voidaspect.java.fp.problems;
 
 import java.util.Objects;
+import java.util.Collection;
 import java.util.function.UnaryOperator;
 
 public final class OperatorChain<T> {
@@ -17,6 +18,11 @@ public final class OperatorChain<T> {
     }
 
     public UnaryOperator<T> combine() {
-        throw new UnsupportedOperationException("not implemented");
+        return t -> {
+            for (UnaryOperator<T> operator : operators) {
+                t = operator.apply(t);
+            }
+            return t;
+        };
     }
 }
